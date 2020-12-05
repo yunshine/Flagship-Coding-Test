@@ -1,6 +1,13 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
 {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
 
+<!-- inventoryAvailability variable used for add to cart button class -->
+{% if current_variant.available %}
+    {% assign inventoryAvailability = 'available' %}
+{% else %}
+    {% assign inventoryAvailability = 'unavailable' %}
+{% endif %}
+
 <img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
 
 {% for image in product.images %}
@@ -29,8 +36,15 @@
     <label for="Quantity">quantity</label>
     <input type="number" id="Quantity" name="quantity" value="1" min="1">
 
-    <!-- the button below has an inline onclick event handler that calls the addToCart function found in application.js and prevents the default browser behavior -->
-    <button type="submit" name="add" id="AddToCart" onclick="addToCart('AddToCartForm'); return false">Add to cart</button>
+    <!-- the button below has an inline onclick event handler that calls the addToCart function found in application.js and prevents the default browser behavior; dynamic class based on item availability -->
+    <button 
+        type="submit"
+        name="add"
+        id="AddToCart"
+        class="inventory-{{ inventoryAvailability }}"
+        onclick="addToCart('AddToCartForm'); return false">
+        Add to cart
+    </button>
 </form>
 
 <div>{{ product.description }}</div>
@@ -41,7 +55,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Modal title</h5>
-                <button id="product-page-modal-header-button" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button id="product-page-modal-header-button" type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -49,7 +64,8 @@
                 <p>Modal body text goes here.</p>
             </div>
             <div class="modal-footer">
-                <button  id="product-page-modal-close-button" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="product-page-modal-close-button" type="button" class="btn btn-secondary"
+                    data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
