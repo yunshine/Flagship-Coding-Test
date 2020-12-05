@@ -5,3 +5,15 @@ a {
         color: turquoise;
     }
 }
+
+// CSS for product page add to cart button
+.inventory-available {
+	background-color: green;
+    &:hover {
+        background-color: blue;
+    }
+}
+
+.inventory-unavailable {
+	background-color: grey;
+}
