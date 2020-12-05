@@ -28,9 +28,29 @@
     {{ current_variant.price | money }}
     <label for="Quantity">quantity</label>
     <input type="number" id="Quantity" name="quantity" value="1" min="1">
-    <!-- the button below has an inline onclick event handler that calls the addToCart function found in application.js and prevents the default browser behavior -->
-    <button type="submit" name="add" id="AddToCart" onclick="addToCart('AddToCartForm'); return false">Add to
-        cart</button>
-</form>
 
+    <!-- the button below has an inline onclick event handler that calls the addToCart function found in application.js and prevents the default browser behavior -->
+    <button type="submit" name="add" id="AddToCart" onclick="addToCart('AddToCartForm'); return false">Add to cart</button>
+  </form>
+  
 <div>{{ product.description }}</div>
+
+<!-- Product Page Modal -->
+<div id="product-page-modal" class="modal" tabindex="-1" role="dialog" style="display: block">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button id="product-page-modal-header-button" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button  id="product-page-modal-close-button" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
