@@ -40,8 +40,9 @@
         {{ content_for_layout }}
     </main>
 
-    <!-- Variable and script to console.log the value of Random Title -->
+    <!-- p tag, variable and script to console.log the value of Random Title -->
     {% assign randomTitleValue = settings.random_title %}
+	<p>{{ randomTitleValue }}</p>
     <script>
         console.log('Value of Random Title: ', '{{randomTitleValue}}');
     </script>
