@@ -4,9 +4,16 @@
 
 <!-- inventoryAvailability variable used for add to cart button class -->
 {% if current_variant.available %}
-    {% assign inventoryAvailability = 'available' %}
+{% assign inventoryAvailability = 'available' %}
 {% else %}
-    {% assign inventoryAvailability = 'unavailable' %}
+{% assign inventoryAvailability = 'unavailable' %}
+{% endif %}
+
+<!-- addToCartButtonText variable used for add to cart button class -->
+{% if product_quantity < 5 %}
+{% assign addToCartButtonText = 'Low stock' %}
+{% else %}
+{% assign addToCartButtonText = 'Add to cart' %}
 {% endif %}
 
 <img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
@@ -38,13 +45,10 @@
     <input type="number" id="Quantity" name="quantity" value="1" min="1">
 
     <!-- the button below has an inline onclick event handler that calls the addToCart function found in application.js and prevents the default browser behavior; dynamic class based on item availability -->
-    <button 
-        type="submit"
-        name="add"
-        id="AddToCart"
-        class="inventory-{{ inventoryAvailability }}"
+    <button type="submit" name="add" id="AddToCart" class="inventory-{{ inventoryAvailability }}"
         onclick="addToCart('AddToCartForm'); return false">
-        Add to cart
+        <!-- This button's text is dynamic based on product quantity -->
+        {{ addToCartButtonText }}
     </button>
 </form>
 
@@ -55,8 +59,9 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <!-- Product quantity displayed in modal. Also, this h5's grammar is dynamic based on product inventory -->
-                <h5 class="modal-title">There {{ product_quantity | pluralize: 'is', 'are' }} currently {{ product_quantity }} {{ product_quantity | pluralize: 'item', 'items' }} in stock.</h5>
+                <!-- Product quantity displayed in modal. Also, this h5's grammar is dynamic based on product quantity -->
+                <h5 class="modal-title">There {{ product_quantity | pluralize: 'is', 'are' }} currently
+                    {{ product_quantity }} {{ product_quantity | pluralize: 'item', 'items' }} in stock.</h5>
                 <button id="product-page-modal-header-button" type="button" class="close" data-dismiss="modal"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
