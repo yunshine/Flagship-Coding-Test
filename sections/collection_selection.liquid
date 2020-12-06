@@ -1,0 +1,23 @@
+<p>Select a Collection:</p>
+{% for collection in collections %}
+    <a href="{{ collection.url }}?sort_by=title-ascending">{{ collection.title }}</a>
+{% endfor %}
+
+{% schema %}
+    {
+        "name": "Collection Selection",
+        "settings": [
+        {
+            "type": "collection",
+            "id": "collection_selection",
+            "label": "Collection Selection"
+        }
+        ]
+    }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
