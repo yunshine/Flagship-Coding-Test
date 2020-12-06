@@ -1,5 +1,6 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
 {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+{% assign product_quantity = current_variant.inventory_quantity %}
 
 <!-- inventoryAvailability variable used for add to cart button class -->
 {% if current_variant.available %}
@@ -54,7 +55,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <!-- Product quantity displayed in modal. Also, this h5's grammar is dynamic based on product inventory -->
+                <h5 class="modal-title">There {{ product_quantity | pluralize: 'is', 'are' }} currently {{ product_quantity }} {{ product_quantity | pluralize: 'item', 'items' }} in stock.</h5>
                 <button id="product-page-modal-header-button" type="button" class="close" data-dismiss="modal"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
