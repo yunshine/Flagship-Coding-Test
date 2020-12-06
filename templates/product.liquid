@@ -67,8 +67,34 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
+            <!-- Information about the current user cart -->
             <div class="modal-body">
-                <p>Modal body text goes here.</p>
+                {%if cart.item_count > 0 %}
+                    <table>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                        <tbody>
+                            {% for item in cart.items %}
+                            <tr>
+                                <td><a href="{{ item.url }}">{{ item.product.title }}</a></td>
+                                <td>{{ item.original_line_price | money }}</td>
+                                <td>{{ item.quantity }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <hr>
+                    {{ cart.item_count }} total {{ cart.item_count | pluralize: 'item', 'items' }} in your cart
+                    <hr>
+                    <p>Your Total: {{ cart.total_price | money }}</p>
+                
+                {% else %}
+                    <p>Your cart currently is empty</p>
+                {% endif %}
             </div>
             <div class="modal-footer">
                 <button id="product-page-modal-close-button" type="button" class="btn btn-secondary"
